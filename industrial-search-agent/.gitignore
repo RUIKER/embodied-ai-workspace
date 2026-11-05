@@ -1,0 +1,37 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# 环境与密钥
+.env
+.env.*
+.claude/settings.local.json
+
+# 生成物（可重跑 ingest / build_index 重建）
+data/chroma_db/
+data/processed/*.jsonl
+
+# 评估逐题输出：含检索到的原文与生成的回答，不得入库
+data/eval_results.jsonl
+data/eval_summary.json
+
+# 保密：真实语料、标准答案及其派生物
+# 这两类文件属于政府文件，只在本机流转，任何情况下都不提交
+data/raw/*
+!data/raw/.gitkeep
+data/private/
+data/smoke/
+data/data/
+docs/materials/
+*.answers.json
+
+# 日志与临时文件
+*.log

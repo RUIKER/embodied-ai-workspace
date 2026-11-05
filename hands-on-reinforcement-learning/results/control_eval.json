@@ -1,0 +1,428 @@
+{
+  "eval_seeds": [
+    10000,
+    10001,
+    10002,
+    10003,
+    10004,
+    10005,
+    10006,
+    10007,
+    10008,
+    10009,
+    10010,
+    10011,
+    10012,
+    10013,
+    10014,
+    10015,
+    10016,
+    10017,
+    10018,
+    10019
+  ],
+  "K": [
+    19.66559040342808,
+    5.725104340321449
+  ],
+  "controllers": {
+    "lqr": {
+      "rows": [
+        {
+          "return": -0.08002924608316564,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 6.261657858885883e-14,
+          "max_abs_angle_tail": 6.20823392694092e-11,
+          "seed": 10000
+        },
+        {
+          "return": -1080.8037143181891,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": 2.5507972573176074,
+          "max_abs_angle_tail": 3.121540655882729,
+          "seed": 10001
+        },
+        {
+          "return": -859.790054169731,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": 2.7173600641999,
+          "max_abs_angle_tail": 3.1131386733728643,
+          "seed": 10002
+        },
+        {
+          "return": -958.4912843984885,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -1.14391088463951,
+          "max_abs_angle_tail": 3.0927842987078424,
+          "seed": 10003
+        },
+        {
+          "return": -1343.1816438903943,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -2.7851916181232417,
+          "max_abs_angle_tail": 3.1369118307381765,
+          "seed": 10004
+        },
+        {
+          "return": -1195.0869921680153,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -1.6807125802213625,
+          "max_abs_angle_tail": 3.124945462430965,
+          "seed": 10005
+        },
+        {
+          "return": -1449.5772994105043,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -3.039412218571002,
+          "max_abs_angle_tail": 3.1287818119943434,
+          "seed": 10006
+        },
+        {
+          "return": -1296.206515695986,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": 2.7114256296814263,
+          "max_abs_angle_tail": 3.1318147914169145,
+          "seed": 10007
+        },
+        {
+          "return": -696.652406319572,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -1.6766964787436924,
+          "max_abs_angle_tail": 3.064073823591066,
+          "seed": 10008
+        },
+        {
+          "return": -0.16152251327660377,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 9.681144774731365e-14,
+          "max_abs_angle_tail": 9.594414152047648e-11,
+          "seed": 10009
+        },
+        {
+          "return": -1438.6408886396605,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": 2.197526519006683,
+          "max_abs_angle_tail": 3.139461582747884,
+          "seed": 10010
+        },
+        {
+          "return": -0.08818777768834114,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 1.9984014443252818e-14,
+          "max_abs_angle_tail": 1.978106567435134e-11,
+          "seed": 10011
+        },
+        {
+          "return": -1503.0191509804438,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -2.486274491299248,
+          "max_abs_angle_tail": 2.9662468446491297,
+          "seed": 10012
+        },
+        {
+          "return": -1.183906480612653,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.45,
+          "final_angle": -3.552713678800501e-13,
+          "max_abs_angle_tail": 3.5220892868892406e-10,
+          "seed": 10013
+        },
+        {
+          "return": -1515.3991131555142,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -2.692378124788117,
+          "max_abs_angle_tail": 3.12247141201774,
+          "seed": 10014
+        },
+        {
+          "return": -0.13883797259730557,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": -8.881784197001252e-14,
+          "max_abs_angle_tail": 8.786305016883489e-11,
+          "seed": 10015
+        },
+        {
+          "return": -1508.5074261037212,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -2.467849045915069,
+          "max_abs_angle_tail": 3.0199771892967027,
+          "seed": 10016
+        },
+        {
+          "return": -138.25996124914673,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 2.5500000000000003,
+          "final_angle": -1.3010037491767434e-10,
+          "max_abs_angle_tail": 1.2907092994396407e-07,
+          "seed": 10017
+        },
+        {
+          "return": -138.8893140318899,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 3.0500000000000003,
+          "final_angle": 4.73830752412141e-10,
+          "max_abs_angle_tail": 4.7008263859282806e-07,
+          "seed": 10018
+        },
+        {
+          "return": -971.5031251722312,
+          "success_strict": false,
+          "success_return": false,
+          "time_to_upright": null,
+          "final_angle": -1.4607007230431162,
+          "max_abs_angle_tail": 3.06246086557788,
+          "seed": 10019
+        }
+      ],
+      "summary": {
+        "n": 20,
+        "success_strict_rate": 0.35,
+        "success_return_rate": 0.35,
+        "mean_return": -804.7830686846871,
+        "median_return": -964.9972047853598,
+        "mean_time_to_upright": 0.8642857142857144
+      }
+    },
+    "lqr_swingup": {
+      "params": {
+        "k": 0.8,
+        "theta_enter": 0.9,
+        "omega_enter": 3.0,
+        "theta_exit": 1.35,
+        "omega_exit": 4.5
+      },
+      "rows": [
+        {
+          "return": -0.08002924608316564,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 6.261657858885883e-14,
+          "max_abs_angle_tail": 6.20823392694092e-11,
+          "seed": 10000
+        },
+        {
+          "return": -117.31601283587896,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.4000000000000001,
+          "final_angle": -4.773070827468473e-12,
+          "max_abs_angle_tail": 4.734342695655869e-09,
+          "seed": 10001
+        },
+        {
+          "return": -126.37223835277128,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.8,
+          "final_angle": -1.4845014106867893e-11,
+          "max_abs_angle_tail": 1.4727206121278869e-08,
+          "seed": 10002
+        },
+        {
+          "return": -118.85707533686922,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.4000000000000001,
+          "final_angle": -4.853006885241484e-12,
+          "max_abs_angle_tail": 4.814415532905514e-09,
+          "seed": 10003
+        },
+        {
+          "return": -250.93282785532475,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 3.2,
+          "final_angle": 7.277449753928522e-10,
+          "max_abs_angle_tail": 7.21986126883678e-07,
+          "seed": 10004
+        },
+        {
+          "return": -114.95291540283918,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.4000000000000001,
+          "final_angle": 4.786393503763975e-12,
+          "max_abs_angle_tail": 4.74888128820794e-09,
+          "seed": 10005
+        },
+        {
+          "return": -248.3028426614959,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 2.6500000000000004,
+          "final_angle": -1.7056844825447115e-10,
+          "max_abs_angle_tail": 1.6921874035347173e-07,
+          "seed": 10006
+        },
+        {
+          "return": -128.38117927207207,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.7000000000000002,
+          "final_angle": -1.1070255823142361e-11,
+          "max_abs_angle_tail": 1.0981718645552974e-08,
+          "seed": 10007
+        },
+        {
+          "return": -127.71791733522781,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 2.3000000000000003,
+          "final_angle": -6.447464784287149e-11,
+          "max_abs_angle_tail": 6.396304641498318e-08,
+          "seed": 10008
+        },
+        {
+          "return": -0.16152251327660377,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 9.681144774731365e-14,
+          "max_abs_angle_tail": 9.594414152047648e-11,
+          "seed": 10009
+        },
+        {
+          "return": -233.32075801503248,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 2.5,
+          "final_angle": -1.0346257184323804e-10,
+          "max_abs_angle_tail": 1.026436118323204e-07,
+          "seed": 10010
+        },
+        {
+          "return": -0.08818777768834114,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": 1.9984014443252818e-14,
+          "max_abs_angle_tail": 1.978106567435134e-11,
+          "seed": 10011
+        },
+        {
+          "return": -232.2777795633352,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 2.35,
+          "final_angle": -6.747313818777911e-11,
+          "max_abs_angle_tail": 6.69392647978384e-08,
+          "seed": 10012
+        },
+        {
+          "return": -1.183906480612653,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.45,
+          "final_angle": -3.552713678800501e-13,
+          "max_abs_angle_tail": 3.5220892868892406e-10,
+          "seed": 10013
+        },
+        {
+          "return": -258.9044215897862,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 2.7,
+          "final_angle": -2.0096369013344884e-10,
+          "max_abs_angle_tail": 1.9937319883922555e-07,
+          "seed": 10014
+        },
+        {
+          "return": -0.13883797259730557,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 0.0,
+          "final_angle": -8.881784197001252e-14,
+          "max_abs_angle_tail": 8.786305016883489e-11,
+          "seed": 10015
+        },
+        {
+          "return": -235.89535450673688,
+          "success_strict": true,
+          "success_return": false,
+          "time_to_upright": 2.4000000000000004,
+          "final_angle": -8.170886189873272e-11,
+          "max_abs_angle_tail": 8.10624292135742e-08,
+          "seed": 10016
+        },
+        {
+          "return": -127.31977724585607,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 2.1,
+          "final_angle": -3.311662055693887e-11,
+          "max_abs_angle_tail": 3.285561334109843e-08,
+          "seed": 10017
+        },
+        {
+          "return": -127.06437262630298,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 2.3000000000000003,
+          "final_angle": 5.789502210973296e-11,
+          "max_abs_angle_tail": 5.743653019862904e-08,
+          "seed": 10018
+        },
+        {
+          "return": -119.8538173083848,
+          "success_strict": true,
+          "success_return": true,
+          "time_to_upright": 1.4500000000000002,
+          "final_angle": -5.350386800273554e-12,
+          "max_abs_angle_tail": 5.3062549909554946e-09,
+          "seed": 10019
+        }
+      ],
+      "summary": {
+        "n": 20,
+        "success_strict_rate": 1.0,
+        "success_return_rate": 0.7,
+        "mean_return": -128.4560886949086,
+        "median_return": -126.71830548953713,
+        "mean_time_to_upright": 1.605
+      }
+    }
+  },
+  "sac_reference": {
+    "n_seeds": 10,
+    "n_episodes": 200,
+    "mean_return": -121.71312056295574,
+    "median_per_seed_return": -121.15263686440885,
+    "success_return_rate": 0.75
+  }
+}

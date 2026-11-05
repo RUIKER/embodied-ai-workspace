@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "explainer",
+  "quality": "showcase",
+  "specification": {
+    "path": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+    "sha256": "c852ce5d987daacd7c9a7faf7546b63ac1b18342dbaa447709b1c472e5b9cf75",
+    "bytes": 6990
+  },
+  "artifact": {
+    "path": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+    "sha256": "cf289d07283b44f69cfe5d36aff1c74c2c02d9d2136c393752858f8ffe6deb26",
+    "bytes": 998638
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "not-run"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.finalize.json",
+    "summaryReceipt": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.finalize-summary.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-23T07:17:03.821Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 950,
+  "browserCheck": {
+    "requested": false,
+    "ran": false
+  }
+}

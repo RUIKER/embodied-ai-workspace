@@ -1,0 +1,21 @@
+group,seed,first_success,converge_eval,converge_return,final_success,wall_clock_sec
+HER ratio=0.8 future,0,234,300,275,1.0,534.1
+HER ratio=0.8 future,1,221,450,408,1.0,539.4
+HER ratio=0.8 future,2,265,350,317,1.0,538.5
+HER ratio=0.8 future,3,362,750,649,1.0,560.1
+HER ratio=0.8 future,4,399,450,426,1.0,547.9
+HER ratio=0.8 future,5,30,,,0.0,626.6
+HER ratio=0.8 future,6,261,450,412,1.0,541.9
+HER ratio=0.8 future,7,265,550,522,1.0,543.1
+HER ratio=0.8 future,8,266,,393,0.0,601.4
+HER ratio=0.8 future,9,245,300,290,1.0,487.1
+no HER,0,697,950,881,1.0,571.4
+no HER,1,717,,,0.0,663.3
+no HER,2,531,950,925,1.0,572.7
+no HER,3,1421,,,0.2,673.0
+no HER,4,890,1300,1314,1.0,601.9
+no HER,5,30,550,532,1.0,537.7
+no HER,6,569,750,657,1.0,548.9
+no HER,7,390,600,592,1.0,536.2
+no HER,8,437,,,0.2,571.2
+no HER,9,393,,,0.2,519.3

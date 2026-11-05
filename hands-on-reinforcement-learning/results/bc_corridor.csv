@@ -1,0 +1,7 @@
+task,demos,seed,n_samples,train_mse,success,success_shifted
+corridor,10,0,60,0.022511,1.0000,0.0000
+corridor,10,1,60,0.026729,0.0000,0.0000
+corridor,50,0,300,0.026393,0.0000,0.0000
+corridor,50,1,300,0.025136,1.0000,0.0000
+corridor,200,0,1200,0.026251,0.0000,0.0000
+corridor,200,1,1200,0.026131,0.0000,0.0000

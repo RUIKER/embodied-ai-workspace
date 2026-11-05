@@ -1,0 +1,46 @@
+# ============================================================
+# 工作区根目录的忽略规则
+# 子项目自己的 .gitignore 仍然生效，这里只兜底和补机密项
+# ============================================================
+
+# 虚拟环境：每个项目自己的，克隆后重建
+**/.venv/
+
+# Python 缓存
+**/__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# 系统文件与 Office 临时文件
+.DS_Store
+Thumbs.db
+~$*
+
+# ------------------------------------------------------------
+# 机密与个人材料：任何情况下都不进仓库
+# ------------------------------------------------------------
+
+# 工业知识库的真实语料、标准答案、索引与评估输出
+industrial-search-agent/data/data/
+industrial-search-agent/data/raw/*
+!industrial-search-agent/data/raw/.gitkeep
+industrial-search-agent/data/private/
+industrial-search-agent/data/smoke/
+industrial-search-agent/data/chroma_db/
+industrial-search-agent/data/processed/*.jsonl
+industrial-search-agent/docs/materials/
+*.answers.json
+
+# 简历原件与旧版备份（含手机号 / 邮箱）
+plan/02_简历_A版_灵巧手.docx
+plan/03_简历_B版_后训练.docx
+plan/04_简历_C版_控制.docx
+plan/_backup/
+
+# ------------------------------------------------------------
+# 可重新生成的产物
+# ------------------------------------------------------------
+**/results/logs/
+*.pt
+*.log

@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# macOS
+.DS_Store
+
+# 实验产物：权重和日志可由 experiments/run_all.py 重新生成；
+# raw/*.json、图和汇总表需要保留。
+experiments/seed_experiments/five_algorithms/results/models/
+experiments/seed_experiments/five_algorithms/results/logs/
+*.pt
+experiments/ablations/*/results/logs/
+experiments/ablations/sac_hparams/sweep_driver.log
+experiments/ablations/sac_hparams/sensitivity_driver.log
+experiments/seed_experiments/halfcheetah_sac/results/logs/
+
+# archify 中间产物
+.archify/
+# 12_HER 训练日志：tqdm 进度条输出，体积大，可由 run_all.sh 重新生成
+experiments/seed_experiments/her_main/results/logs/
+
+# 本地 VS Code 配置：解释器路径是机器相关的
+.vscode/
+MUJOCO_LOG.TXT

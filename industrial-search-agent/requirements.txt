@@ -1,0 +1,23 @@
+# ===== 第1周:知识结构化与数据清洗 =====
+python-docx>=0.8.11        # 读取 .docx 原始文档
+pypdf>=4.0.0               # 读取 .pdf 原始文档
+tqdm>=4.65.0               # 进度条
+
+# ===== 第2周:RAG 问答链路 =====
+langchain>=0.1.0
+langchain-community>=0.0.20
+langchain-text-splitters>=0.0.1
+chromadb>=0.4.22                       # 向量数据库(持久化)
+sentence-transformers>=2.5.0           # 本地中文 embedding / reranker
+rank-bm25>=0.2.2                       # 关键词检索(hybrid search)
+zhipuai>=2.0.0                         # 智谱 GLM API(生成)
+modelscope>=1.10.0                     # 模型下载(国内,绕开 HF 元数据校验问题)
+
+# ===== 第3周:MCP / Agent =====
+mcp>=0.1.0                  # MCP Server(Streamable HTTP,需 Python 3.10+)
+fastapi>=0.110.0            # MCP 回退 demo
+uvicorn>=0.27.0             # MCP 回退 demo
+
+# ===== 第4周:评估 + Demo =====
+gradio>=4.0.0               # Web demo
+pandas>=2.0.0               # 评估结果统计

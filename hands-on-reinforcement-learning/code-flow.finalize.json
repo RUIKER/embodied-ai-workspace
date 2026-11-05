@@ -1,0 +1,548 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "explainer",
+  "quality": "showcase",
+  "startedAt": "2026-10-27T02:34:41.166Z",
+  "specification": {
+    "path": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+    "sha256": "c852ce5d987daacd7c9a7faf7546b63ac1b18342dbaa447709b1c472e5b9cf75",
+    "bytes": 6990
+  },
+  "artifact": {
+    "path": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+    "sha256": "cf289d07283b44f69cfe5d36aff1c74c2c02d9d2136c393752858f8ffe6deb26",
+    "bytes": 998638
+  },
+  "stages": {
+    "browser-check": {
+      "status": "not-run",
+      "execution": "not-requested"
+    },
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/opt/homebrew/Cellar/node/25.9.0_2/bin/node",
+        "/Users/yanrui/.claude/skills/archify/bin/archify.mjs",
+        "deliver",
+        "explainer",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "c852ce5d987daacd7c9a7faf7546b63ac1b18342dbaa447709b1c472e5b9cf75",
+          "bytes": 6990
+        },
+        "validation": {
+          "checksPassed": 4,
+          "checkCount": 4,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 558,
+      "command": [
+        "/opt/homebrew/Cellar/node/25.9.0_2/bin/node",
+        "/Users/yanrui/.claude/skills/archify/bin/archify.mjs",
+        "deliver",
+        "explainer",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "70c46c5d-4921-44ae-865f-31f58191d0a7",
+        "ok": true,
+        "command": "deliver",
+        "type": "explainer",
+        "input": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+        "output": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+        "explainer": {
+          "preparedSha256": "a0e2335a63a3dd1e57f99206b361e0b1cb4a3dcd184912930b844750ec87eb55",
+          "dependencies": [
+            {
+              "kind": "repository",
+              "id": "slice-main",
+              "path": "09_DDPG/Pendulum/main.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "6a5beba8bdd7457661e521cfda40e799ce7528aca5e3641c44055c0226c18fea",
+              "bytes": 1109
+            },
+            {
+              "kind": "repository",
+              "id": "slice-net",
+              "path": "08_PPO/Pendulum/networks.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "085fbdf2eb59a3b603475b365cbcd2c26267720df0e14a6fe11cd2bac6171036",
+              "bytes": 1785
+            },
+            {
+              "kind": "repository",
+              "id": "ppo-batch",
+              "path": "08_PPO/Pendulum/trainer.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "b5849a42603a2e091a30b51c6fcedd70f82dedff1144a1c1e87b319f36a700a9",
+              "bytes": 2308
+            },
+            {
+              "kind": "repository",
+              "id": "ddpg-step",
+              "path": "09_DDPG/Pendulum/trainer.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "f40d58eaef1ad5fd7627a9c6689c763d4bc455536ad9abedc60f0dc98a6a7ffc",
+              "bytes": 1935
+            },
+            {
+              "kind": "repository",
+              "id": "trpo-act",
+              "path": "07_TRPO/Pendulum/agents.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "dc21ceb42bea37c01fb1b5513ac7c283bb52d22096964eb852ef8dffc477435f",
+              "bytes": 9155
+            },
+            {
+              "kind": "repository",
+              "id": "run-all",
+              "path": "experiments/run_all.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "6ce725cdc685820fc348ab072bd2184141fffd111ecc17d4097af9942456afbd",
+              "bytes": 5277
+            },
+            {
+              "kind": "repository",
+              "id": "run-one",
+              "path": "experiments/run_one.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "095e6b66ee94f61024c938cfa615591d7e57c18f22069efb62df0e84f24a0579",
+              "bytes": 12025
+            },
+            {
+              "kind": "repository",
+              "id": "analyze",
+              "path": "experiments/analyze.py",
+              "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+              "sha256": "950b775076f24a79e100ef2abb44a38b967616a87471dd8a89f8a04ec46d37bb",
+              "bytes": 18714
+            },
+            {
+              "kind": "diagram-spec",
+              "id": "slice-flow",
+              "inline": true,
+              "sha256": "e78aac83de5f52ceef5a7201c3616a51806db470141f06186c50e7a4d92319dd",
+              "bytes": 1095
+            },
+            {
+              "kind": "diagram-spec",
+              "id": "pipeline-flow",
+              "inline": true,
+              "sha256": "1b1e8489e3f9257a2dc443e32e82c6a46b4fbd6bb988a42cc18116c78df57f19",
+              "bytes": 805
+            }
+          ]
+        },
+        "specification": {
+          "sha256": "c852ce5d987daacd7c9a7faf7546b63ac1b18342dbaa447709b1c472e5b9cf75",
+          "bytes": 6990
+        },
+        "artifact": {
+          "sha256": "cf289d07283b44f69cfe5d36aff1c74c2c02d9d2136c393752858f8ffe6deb26",
+          "bytes": 998638
+        },
+        "validation": {
+          "checksPassed": 4,
+          "checkCount": 4,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 303,
+      "command": [
+        "/opt/homebrew/Cellar/node/25.9.0_2/bin/node",
+        "/Users/yanrui/.claude/skills/archify/bin/archify.mjs",
+        "check",
+        "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+        "family": "explainer",
+        "artifact": {
+          "sha256": "cf289d07283b44f69cfe5d36aff1c74c2c02d9d2136c393752858f8ffe6deb26",
+          "bytes": 998638
+        },
+        "checks": [
+          {
+            "name": "explainer_structure",
+            "ok": true,
+            "details": [
+              "84 unique DOM IDs"
+            ]
+          },
+          {
+            "name": "explainer_payload_identity",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "explainer_dependencies",
+            "ok": true,
+            "details": [
+              "10 frozen dependencies"
+            ]
+          },
+          {
+            "name": "explainer_native_diagrams",
+            "ok": true,
+            "details": [
+              "slice-flow: pass",
+              "pipeline-flow: pass"
+            ]
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "issues": [],
+          "nativeDiagrams": [
+            {
+              "id": "slice-flow",
+              "receipt": {
+                "ok": true,
+                "file": "/var/folders/c3/kxvxf3lx2ss1b349yz2hthfh0000gn/T/archify-explainer-check-1KTBb4/child.html",
+                "artifact": {
+                  "sha256": "a2213d6d76353787619753a0c9825a7a7dc5641feebd64b9553aba8f539f3c5b",
+                  "bytes": 810949
+                },
+                "checks": [
+                  {
+                    "name": "single_svg",
+                    "ok": true,
+                    "details": [
+                      "found 1 <svg> block(s)"
+                    ]
+                  },
+                  {
+                    "name": "finite_svg",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "orthogonal_arrows",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "label_route_clearance",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "relationship_crossings",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "relationship_corridors",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "container_border_runs",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "route_rhythm",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "legend_clearance",
+                    "ok": true,
+                    "details": []
+                  }
+                ],
+                "composition": {
+                  "schemaVersion": 1,
+                  "profile": "showcase",
+                  "status": "pass",
+                  "summary": {
+                    "errors": 0,
+                    "warnings": 0
+                  },
+                  "metrics": {
+                    "properCrossings": 0,
+                    "resolvedCrossovers": 0,
+                    "ambiguousCorridors": 0,
+                    "arrowheadCollisions": 0,
+                    "containerBorderRuns": 0,
+                    "labelRouteClearanceIssues": 0,
+                    "labelCanvasOverflowIssues": 0,
+                    "minLabelRouteClearance": 96.2,
+                    "desktopReadabilityIssues": 0,
+                    "viewportHeightIssues": 0,
+                    "minProjectedNodeTextPx": 7.693898655635987,
+                    "maxBends": 0,
+                    "routesOverSuggestedBends": 0,
+                    "maxStretch": 1,
+                    "routesOverSuggestedStretch": 0,
+                    "minSegmentPx": 46.8,
+                    "minInteriorSegmentPx": null,
+                    "shortSegmentCount": 0,
+                    "shortEndpointSegmentCount": 0,
+                    "shortInteriorSegmentCount": 0,
+                    "microSegmentCount": 0
+                  },
+                  "suggestedLimits": {
+                    "bendsPerRelationship": 2,
+                    "stretch": 1.35,
+                    "segmentPx": 16,
+                    "microSegmentPx": 8
+                  },
+                  "routeReview": {
+                    "crossings": [],
+                    "detours": []
+                  },
+                  "leadingSpace": {
+                    "measured": false,
+                    "reviewSuggested": false
+                  },
+                  "desktopReadability": {
+                    "budgetBasis": "legacy-930",
+                    "readerContract": "declared-wide-v1",
+                    "availableDiagramWidth": 930,
+                    "actualBudgetPx": 930,
+                    "limit": "legacy",
+                    "requestedTargetPx": null,
+                    "requestedTargetMet": null,
+                    "hardFloorPx": 6,
+                    "hardFloorMet": true,
+                    "minimumOwner": {
+                      "kind": "edge",
+                      "id": "agent-to-trainer-1",
+                      "from": "agent",
+                      "to": "trainer"
+                    },
+                    "minimumSourceTextPx": 8,
+                    "minimumProjectedTextPx": 7.693898655635987,
+                    "semanticTextCount": 11
+                  },
+                  "issues": []
+                }
+              }
+            },
+            {
+              "id": "pipeline-flow",
+              "receipt": {
+                "ok": true,
+                "file": "/var/folders/c3/kxvxf3lx2ss1b349yz2hthfh0000gn/T/archify-explainer-check-fFiDiy/child.html",
+                "artifact": {
+                  "sha256": "e35ae57383d79adf5c43ec55b060ed3d8670c870d2505c228c3711e0575bc910",
+                  "bytes": 808704
+                },
+                "checks": [
+                  {
+                    "name": "single_svg",
+                    "ok": true,
+                    "details": [
+                      "found 1 <svg> block(s)"
+                    ]
+                  },
+                  {
+                    "name": "finite_svg",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "orthogonal_arrows",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "label_route_clearance",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "relationship_crossings",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "relationship_corridors",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "container_border_runs",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "route_rhythm",
+                    "ok": true,
+                    "details": []
+                  },
+                  {
+                    "name": "legend_clearance",
+                    "ok": true,
+                    "details": []
+                  }
+                ],
+                "composition": {
+                  "schemaVersion": 1,
+                  "profile": "showcase",
+                  "status": "pass",
+                  "summary": {
+                    "errors": 0,
+                    "warnings": 0
+                  },
+                  "metrics": {
+                    "properCrossings": 0,
+                    "resolvedCrossovers": 0,
+                    "ambiguousCorridors": 0,
+                    "arrowheadCollisions": 0,
+                    "containerBorderRuns": 0,
+                    "labelRouteClearanceIssues": 0,
+                    "labelCanvasOverflowIssues": 0,
+                    "minLabelRouteClearance": 54.5,
+                    "desktopReadabilityIssues": 0,
+                    "viewportHeightIssues": 0,
+                    "minProjectedNodeTextPx": 8,
+                    "maxBends": 1,
+                    "routesOverSuggestedBends": 0,
+                    "maxStretch": 1,
+                    "routesOverSuggestedStretch": 0,
+                    "minSegmentPx": 141,
+                    "minInteriorSegmentPx": null,
+                    "shortSegmentCount": 0,
+                    "shortEndpointSegmentCount": 0,
+                    "shortInteriorSegmentCount": 0,
+                    "microSegmentCount": 0
+                  },
+                  "suggestedLimits": {
+                    "bendsPerRelationship": 2,
+                    "stretch": 1.35,
+                    "segmentPx": 16,
+                    "microSegmentPx": 8
+                  },
+                  "routeReview": {
+                    "crossings": [],
+                    "detours": []
+                  },
+                  "leadingSpace": {
+                    "measured": true,
+                    "emptyTopPx": 80,
+                    "emptyTopRatio": 0.203,
+                    "occupiedTop": 80,
+                    "viewBoxTop": 0,
+                    "canvasHeight": 394,
+                    "typicalNodeHeight": 60,
+                    "reviewSuggested": false
+                  },
+                  "desktopReadability": {
+                    "budgetBasis": "recognized-declared-wide",
+                    "readerContract": "declared-wide-v1",
+                    "availableDiagramWidth": 930,
+                    "actualBudgetPx": 930,
+                    "actualReaderWidth": 960,
+                    "desiredReaderWidth": 960,
+                    "viewportCap": 1376,
+                    "limit": "source-size",
+                    "requestedTargetPx": 7.5,
+                    "requestedTargetMet": true,
+                    "hardFloorPx": 6,
+                    "hardFloorMet": true,
+                    "minimumOwner": {
+                      "kind": "edge",
+                      "id": "driver-to-algos-1",
+                      "from": "driver",
+                      "to": "algos"
+                    },
+                    "minimumSourceTextPx": 8,
+                    "minimumProjectedTextPx": 8,
+                    "semanticTextCount": 7
+                  },
+                  "issues": []
+                }
+              }
+            }
+          ]
+        },
+        "diagnostics": [],
+        "provenance": "current",
+        "deliveryReceiptId": "70c46c5d-4921-44ae-865f-31f58191d0a7"
+      }
+    }
+  },
+  "browserCheck": {
+    "requested": false,
+    "ran": false
+  },
+  "diagnostics": [],
+  "evidence": {
+    "receipt": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.finalize.json",
+    "summaryReceipt": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "finishedAt": "2026-10-27T02:34:42.116Z",
+  "durationMs": 950,
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-23T07:17:03.821Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  }
+}

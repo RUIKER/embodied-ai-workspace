@@ -1,0 +1,28 @@
+{
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "algos": [
+    "ddpg",
+    "td3",
+    "sac",
+    "ppo",
+    "trpo"
+  ],
+  "off_policy_steps": 40000,
+  "on_policy_steps": 400000,
+  "off_eval_every": 2000,
+  "on_eval_every": 10000,
+  "eval_episodes": 20,
+  "eval_seed": 10000,
+  "device": "cpu"
+}

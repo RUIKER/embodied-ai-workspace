@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "70c46c5d-4921-44ae-865f-31f58191d0a7",
+  "status": "current",
+  "command": "deliver",
+  "type": "explainer",
+  "input": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/.archify/explainer-code-flow-20261027-102733/candidate.archify.md",
+  "output": "/Users/yanrui/Downloads/硕士/gpulab/Reinforcement Learning/code/code-flow.html",
+  "specification": {
+    "sha256": "c852ce5d987daacd7c9a7faf7546b63ac1b18342dbaa447709b1c472e5b9cf75",
+    "bytes": 6990
+  },
+  "artifact": {
+    "sha256": "cf289d07283b44f69cfe5d36aff1c74c2c02d9d2136c393752858f8ffe6deb26",
+    "bytes": 998638
+  },
+  "explainer": {
+    "preparedSha256": "a0e2335a63a3dd1e57f99206b361e0b1cb4a3dcd184912930b844750ec87eb55",
+    "dependencies": [
+      {
+        "kind": "repository",
+        "id": "slice-main",
+        "path": "09_DDPG/Pendulum/main.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "6a5beba8bdd7457661e521cfda40e799ce7528aca5e3641c44055c0226c18fea",
+        "bytes": 1109
+      },
+      {
+        "kind": "repository",
+        "id": "slice-net",
+        "path": "08_PPO/Pendulum/networks.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "085fbdf2eb59a3b603475b365cbcd2c26267720df0e14a6fe11cd2bac6171036",
+        "bytes": 1785
+      },
+      {
+        "kind": "repository",
+        "id": "ppo-batch",
+        "path": "08_PPO/Pendulum/trainer.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "b5849a42603a2e091a30b51c6fcedd70f82dedff1144a1c1e87b319f36a700a9",
+        "bytes": 2308
+      },
+      {
+        "kind": "repository",
+        "id": "ddpg-step",
+        "path": "09_DDPG/Pendulum/trainer.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "f40d58eaef1ad5fd7627a9c6689c763d4bc455536ad9abedc60f0dc98a6a7ffc",
+        "bytes": 1935
+      },
+      {
+        "kind": "repository",
+        "id": "trpo-act",
+        "path": "07_TRPO/Pendulum/agents.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "dc21ceb42bea37c01fb1b5513ac7c283bb52d22096964eb852ef8dffc477435f",
+        "bytes": 9155
+      },
+      {
+        "kind": "repository",
+        "id": "run-all",
+        "path": "experiments/run_all.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "6ce725cdc685820fc348ab072bd2184141fffd111ecc17d4097af9942456afbd",
+        "bytes": 5277
+      },
+      {
+        "kind": "repository",
+        "id": "run-one",
+        "path": "experiments/run_one.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "095e6b66ee94f61024c938cfa615591d7e57c18f22069efb62df0e84f24a0579",
+        "bytes": 12025
+      },
+      {
+        "kind": "repository",
+        "id": "analyze",
+        "path": "experiments/analyze.py",
+        "revision": "fbe0e5f1781694da457a57549997240fa793b5e2",
+        "sha256": "950b775076f24a79e100ef2abb44a38b967616a87471dd8a89f8a04ec46d37bb",
+        "bytes": 18714
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "slice-flow",
+        "inline": true,
+        "sha256": "e78aac83de5f52ceef5a7201c3616a51806db470141f06186c50e7a4d92319dd",
+        "bytes": 1095
+      },
+      {
+        "kind": "diagram-spec",
+        "id": "pipeline-flow",
+        "inline": true,
+        "sha256": "1b1e8489e3f9257a2dc443e32e82c6a46b4fbd6bb988a42cc18116c78df57f19",
+        "bytes": 805
+      }
+    ]
+  }
+}
