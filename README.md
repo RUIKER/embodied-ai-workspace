@@ -34,6 +34,35 @@ pip install -r requirements.txt
 python scripts/smoke_test.py        # 用虚构语料跑通全链路
 ```
 
+## 推送到 GitHub
+
+仓库要先在网页上建好（脚本不能替你建，因为需要浏览器登录）：
+
+1. 打开 <https://github.com/new>，仓库名 `embodied-ai-workspace`，选择可见性，**不要勾** README / .gitignore / license。
+2. 在本机运行：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\push.ps1
+```
+
+脚本会检查 `origin`、询问是否先提交未提交的改动，然后推送。第一次会弹浏览器登录 GitHub。
+
+## 同步回原仓库
+
+工作区仓库只有一个初始提交，和两个子仓库没有共同历史，`git subtree push` 会被当成无关历史拒绝。
+改用镜像脚本：从 `_embodied_git_backup`（原 `.git` 的备份）克隆一份，覆盖成工作区内容，提交后推送，原仓库历史保持不变。
+
+```powershell
+# 预览差异，不提交、不推送
+powershell -ExecutionPolicy Bypass -File scripts\sync-origin.ps1
+
+# 同步强化学习仓库（默认 rl）
+powershell -ExecutionPolicy Bypass -File scripts\sync-origin.ps1 -Push
+
+# 同步 Search Agent（私有仓库）
+powershell -ExecutionPolicy Bypass -File scripts\sync-origin.ps1 -Repo search -Push
+```
+
 ## 说明
 
 - 两个子项目原本是独立仓库，这个工作区是它们的协作快照。原仓库仍在，提交历史保留在那里。
