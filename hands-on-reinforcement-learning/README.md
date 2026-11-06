@@ -22,6 +22,7 @@
 | 12 | `12_HER` | 二维目标导向任务上的 DDPG + HER（replay buffer 改造） | `GridWorld/main.py` |
 | 13 | `13_Imitation` | 模仿学习：BC 最小实现（GridWorld / 双走廊），BC / ACT / Diffusion Policy 算法卡片 | `bc_minimal.py` |
 | 14 | `14_Control/Pendulum` | 有模型的经典控制对照线：LQR、能量摆起、参数扰动与执行延迟 | `lqr.py`、`evaluate.py` |
+| 15 | [`15_RobotSystem`](15_RobotSystem/README.md) | Panda 仿真与 ROS2 轨迹、状态和录包回放冒烟 | `panda_smoke.py`、`ros2_smoke/run.py` |
 
 每个算法目录下的 `经验总结.md` 都采用同一结构：先回答“特点、针对的缺陷、局限性、应用场景”四个问题，再记录实现细节、实验结果和排错经验。
 

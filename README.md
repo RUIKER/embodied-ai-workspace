@@ -7,7 +7,7 @@
 
 | 目录 | 内容 | 原仓库 |
 | --- | --- | --- |
-| `plan/` | 作战计划、周部署清单、公司表、JD 对照表、每周反思、进度追踪 | — |
+| [`plan/`](plan/README.md) | 作战计划、周部署清单、工程验收、复习卡片与求职材料 | — |
 | `hands-on-reinforcement-learning/` | 01–14 章：DQN / 策略梯度 / DDPG / TD3 / SAC / HER / 模仿学习 / 经典控制对照；统一评估协议的对照实验 | [RUIKER/hands-on-reinforcement-learning](https://github.com/RUIKER/hands-on-reinforcement-learning) |
 | `industrial-search-agent/` | 工业知识库 RAG：语料清洗切分、向量索引、BM25 / 向量混合检索、rerank、MCP 工具封装 | `RUIKER/industrial-search-agent`（私有） |
 

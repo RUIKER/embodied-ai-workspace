@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>panda_trajectory_smoke</name>
+  <version>0.0.1</version>
+  <description>Fixed trajectory publisher for the Panda integration smoke test.</description>
+  <maintainer email="maintainer@example.com">Panda smoke test maintainers</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>trajectory_msgs</depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>
