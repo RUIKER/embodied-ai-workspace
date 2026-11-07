@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>panda_sim</name>
+  <version>0.0.1</version>
+  <description>MuJoCo Panda position trajectory executor for ROS 2.</description>
+  <maintainer email="maintainer@example.com">Panda project maintainers</maintainer>
+  <license>MIT</license>
+  <exec_depend>builtin_interfaces</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>rosgraph_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>std_srvs</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

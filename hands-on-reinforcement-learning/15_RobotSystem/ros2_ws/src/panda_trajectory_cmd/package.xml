@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>panda_trajectory_cmd</name>
+  <version>0.0.1</version>
+  <description>Publish a fixed Panda joint trajectory and its execution heartbeat.</description>
+  <maintainer email="maintainer@example.com">Panda project maintainers</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>trajectory_msgs</depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
