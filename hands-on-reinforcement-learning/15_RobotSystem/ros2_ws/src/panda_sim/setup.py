@@ -8,6 +8,7 @@ setup(
     data_files=[
         ("share/ament_index/resource_index/packages", ["resource/panda_sim"]),
         ("share/panda_sim", ["package.xml"]),
+        ("share/panda_sim/launch", ["launch/panda_demo.launch.py"]),
     ],
     install_requires=["setuptools", "mujoco", "numpy"],
     entry_points={"console_scripts": ["panda_sim_node = panda_sim.node:main"]},

@@ -6,6 +6,7 @@ import mujoco
 import numpy as np
 import rclpy
 from builtin_interfaces.msg import Time
+from rcl_interfaces.msg import ParameterDescriptor
 from rclpy.clock import Clock, ClockType
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
@@ -59,6 +60,17 @@ def main(args=None):
             scene_path = node.declare_parameter("scene_path", "").value
             if not scene_path:
                 raise ValueError("Set the scene_path parameter to the Panda scene.xml")
+            startup_only = ParameterDescriptor(read_only=True)
+            steps_per_message = node.declare_parameter(
+                "steps_per_message", STEPS_PER_MESSAGE, startup_only,
+            ).value
+            heartbeat_timeout = node.declare_parameter(
+                "heartbeat_timeout_s", HEARTBEAT_TIMEOUT, startup_only,
+            ).value
+            if steps_per_message < 1:
+                raise ValueError("steps_per_message must be positive")
+            if not np.isfinite(heartbeat_timeout) or heartbeat_timeout <= 0:
+                raise ValueError("heartbeat_timeout_s must be finite and positive")
 
             model = mujoco.MjModel.from_xml_path(scene_path)
             data = mujoco.MjData(model)
@@ -89,7 +101,7 @@ def main(args=None):
                     active = None
                     node.get_logger().warning("Trajectory heartbeat timed out; holding last targets")
 
-                for _ in range(STEPS_PER_MESSAGE):
+                for _ in range(steps_per_message):
                     if active is not None:
                         start_time, times, positions = active
                         elapsed = round((data.time - start_time) * NANOSECONDS_PER_SECOND)
@@ -128,7 +140,7 @@ def main(args=None):
                     return
 
                 active = (data.time, times, positions)
-                heartbeat_deadline = time.monotonic() + HEARTBEAT_TIMEOUT
+                heartbeat_deadline = time.monotonic() + heartbeat_timeout
                 joint_names = ", ".join(names)
                 node.get_logger().info(
                     f"Accepted JointTrajectory with {len(times)} points "
@@ -140,7 +152,7 @@ def main(args=None):
                 nonlocal heartbeat_deadline
                 now = time.monotonic()
                 if active is not None and now < heartbeat_deadline:
-                    heartbeat_deadline = now + HEARTBEAT_TIMEOUT
+                    heartbeat_deadline = now + heartbeat_timeout
 
             def reset(_request, response):
                 nonlocal trajectory_subscription, heartbeat_deadline
@@ -166,7 +178,7 @@ def main(args=None):
             )
             node.create_subscription(Empty, "trajectory_heartbeat", receive_heartbeat, latest_only)
             node.create_service(Trigger, "reset", reset)
-            period = STEPS_PER_MESSAGE * model.opt.timestep
+            period = steps_per_message * model.opt.timestep
             timer_clock = Clock(clock_type=ClockType.STEADY_TIME)
             node.create_timer(period, publish_state, clock=timer_clock)
             node.get_logger().info(f"Publishing Panda joint states every {period:.3f} s")

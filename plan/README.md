@@ -1,12 +1,15 @@
 # 计划与复习入口
 
-[《作战计划 v5》](00_作战计划.docx)决定本轮范围与优先级。每周先看部署清单，执行后把证据记入进度追踪，再用复习卡口述一个链路、预测一个参数变化或复盘一次故障。
+[《作战计划 v8》](00_作战计划.docx)决定本轮范围与优先级。每个工作日区分 agent 交付与本人手动测试、理解和复盘。机械臂控制与仿真优先，SAC 策略闭环和末端运动学纳入主线。
 
 ## 计划与执行
 
 | 用途 | 文件 |
 | --- | --- |
 | 看本周做什么 | [W2 部署清单](01_本周部署清单_W2.docx) |
+| 回顾 W2 进度 | [W2 周报](W2_周报_2026-11-08.md) |
+| 开始 W3 个人复现 | [W3 部署清单与 11 月 8 日岗位核验](02_W3部署清单.md) |
+| 查后续每日分工 | [W4–W11 每日分工](03_W4-W11每日分工.md) |
 | 查工程范围、验收条件和最新证据 | [工程主线验收](11_工程主线验收.md)、[Panda 冒烟与复现](../hands-on-reinforcement-learning/15_RobotSystem/README.md) |
 | 记录完成状态 | [进度追踪](10_进度追踪.xlsx) |
 | 开始一个工作块 | [工程提示词](05_ClaudeCode提示词.docx) |
@@ -26,7 +29,6 @@
 - 模仿学习见 [BC](../hands-on-reinforcement-learning/13_Imitation/算法卡片_BC.md)、[ACT](../hands-on-reinforcement-learning/13_Imitation/算法卡片_ACT.md)、[Diffusion Policy](../hands-on-reinforcement-learning/13_Imitation/算法卡片_DP.md)。实践证据见 [BC 最小实现与结果](../hands-on-reinforcement-learning/13_Imitation/README.md)。
 - 强化学习见 [算法路线](../hands-on-reinforcement-learning/算法路线.md)、[五算法评估协议](../hands-on-reinforcement-learning/experiments/seed_experiments/five_algorithms/README.md)、[HER 经验总结](../hands-on-reinforcement-learning/12_HER/经验总结.md) 和 [SAC 经验总结](../hands-on-reinforcement-learning/11_SAC/经验总结.md)。引用实验数值前先查对应评估协议和 seed。
 - 经典控制见 [Pendulum 对照](../hands-on-reinforcement-learning/14_Control/Pendulum/README.md)，重点复习 LQR 有效域、能量摆起、参数扰动和执行延迟。
-- Search Agent 的检索、重排、MCP 和评测口径见 [项目 README](../industrial-search-agent/README.md) 与 [评估协议](../industrial-search-agent/docs/eval-protocol.md)。当前可讲虚构语料冒烟及工程链路。
 
 ## 面试与投递
 

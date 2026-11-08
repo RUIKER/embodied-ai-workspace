@@ -1,0 +1,54 @@
+{
+  "scene": "/mnt/c/Users/PC/AppData/Local/EmbodiedAI/PandaSmoke/menagerie-98a70c5/franka_emika_panda/scene.xml",
+  "mujoco": "3.17.0",
+  "numpy": "2.5.4",
+  "joint": "joint1",
+  "timestep_s": 0.002,
+  "warmup_s": 0.0,
+  "trajectory_duration_s": 0.4,
+  "observation_duration_s": 0.8,
+  "target_start_rad": 0.0,
+  "target_end_rad": 0.1,
+  "baseline_damping": 1.0,
+  "changed_damping": 2.0,
+  "damping_factor": 2.0,
+  "repeat_max_abs_position_delta_rad": {
+    "baseline": 0.0,
+    "damped": 0.0
+  },
+  "condition_max_abs_position_delta_rad": 5.1124587567549784e-05,
+  "baseline_tracking_rmse_rad": 0.015184068551356088,
+  "damped_tracking_rmse_rad": 0.015213118175850656,
+  "baseline_final_position_rad": 0.09962209200751675,
+  "damped_final_position_rad": 0.09961750010624985,
+  "samples": [
+    {
+      "time_s": 0.10000000000000007,
+      "applied_target_rad": 0.0245,
+      "baseline_position_rad": 0.00876642827583152,
+      "damped_position_rad": 0.008752617126429444,
+      "condition_delta_rad": -1.3811149402076506e-05
+    },
+    {
+      "time_s": 0.20000000000000015,
+      "applied_target_rad": 0.0495,
+      "baseline_position_rad": 0.028040217180821156,
+      "damped_position_rad": 0.02800719676016909,
+      "condition_delta_rad": -3.302042065206692e-05
+    },
+    {
+      "time_s": 0.4000000000000003,
+      "applied_target_rad": 0.0995,
+      "baseline_position_rad": 0.07532768276217906,
+      "damped_position_rad": 0.07527685173021338,
+      "condition_delta_rad": -5.0831031965681284e-05
+    },
+    {
+      "time_s": 0.8000000000000006,
+      "applied_target_rad": 0.1,
+      "baseline_position_rad": 0.09962209200751675,
+      "damped_position_rad": 0.09961750010624985,
+      "condition_delta_rad": -4.591901266892684e-06
+    }
+  ]
+}

@@ -4,6 +4,98 @@
 
 学习与排障中的追问和解释见 [经验总结](经验总结.md)。
 
+11 月 9 日分终端练习见 [Panda 固定轨迹手动复现](Panda轨迹手动复现.md)。
+
+## 额外练习：关节阻尼受控对照
+
+`panda_damping_compare.py` 加载同一固定模型，以 `home` 关键帧重置。基线使用原始 `joint1` 关节阻尼，对照组只将该轴的 `dof_damping` 乘以指定倍数。两组其余模型参数、初始状态、执行器控制和固定输入一致。脚本直接使用 MuJoCo 推进仿真，命令轨迹复用单轴示例的目标值和线性插值规则。
+
+无随机采样。每组分别从同一关键帧运行两次，每次从 0 rad 目标在 0.4 s 内线性到 0.1 rad，再保持到 0.8 s。物理步长 0.002 s。每步先设置位置目标，再推进一步；记录该步开始的控制时间、实际施加的目标与推进后的状态时间和位置。跟踪 RMSE 比较每步末位置和该步施加目标。
+
+在 WSL 中用已有模型和 Python 环境运行。输出目录必须为新目录。
+
+```bash
+source /opt/ros/lyrical/setup.bash
+project='/mnt/c/Users/PC/Desktop/Embodied_Inteligence_Internship/hands-on-reinforcement-learning/15_RobotSystem'
+scene='/mnt/c/Users/PC/AppData/Local/EmbodiedAI/PandaSmoke/menagerie-98a70c5/franka_emika_panda/scene.xml'
+panda_python='/var/tmp/embodied-panda-ros2-lyrical/ros-venv/bin/python'
+out="/mnt/c/Users/PC/Documents/ChatGPT/EIP/damping-$(date +%Y%m%d-%H%M%S)"
+"$panda_python" "$project/panda_damping_compare.py" "$scene" "$out" --damping-factor 2
+```
+
+输出 `trajectory.csv` 和 `summary.json`。同组两次位置差用于检查固定条件下的重复性。对照组第一次减基线第一次的位置差用于观察阻尼变化下的响应差异。脚本同时报告整段跟踪 RMSE、末帧位置和四个时间点的样本。这个离线练习不包含 ROS2 通信或传感器噪声。
+
+Agent 在 WSL 2、MuJoCo 3.17.0、NumPy 2.5.4 上用 `--damping-factor 1` 检查对照两侧完全一致，再用 `--damping-factor 2` 检查阻尼变化产生可观察差异。本人于 2026-11-08 在相同版本下运行双倍阻尼对照，原始数据、摘要与图分别保存在 [轨迹数据](results/20261108_joint1_damping/trajectory.csv)、[摘要](results/20261108_joint1_damping/summary.json) 和 [对照图](results/20261108_joint1_damping/comparison.png)。
+
+使用带 NumPy 和 Matplotlib 的 Python，从某次实验目录生成图。
+
+```bash
+python "$project/panda_damping_plot.py" "$out"
+```
+
+输出 `comparison.png` 包括关节位置、两组位置差、速度、阻尼力矩分量、跟踪误差和组内重执行差异。阻尼力矩分量按采样时的 `−dof_damping × qvel` 重建，单位 N·m；执行器力矩没有包含在该量内。图中目标值是在物理步开始时施加的控制目标，状态值取该步结束时的采样。WSL 现有 MuJoCo venv 是否安装 Matplotlib 需单独确认；本次绘图使用 Windows 的独立临时 Python 依赖。
+
+## Panda 正运动学检查
+
+`panda_fk.py` 以模型的 `link0` 为参考坐标系，计算 `hand` 坐标系的位姿。末端选择的是模型中 `hand` 的原点，夹爪指尖或工具中心需要额外的坐标变换。
+
+脚本按名称找到 `link0` 到 `hand` 的连杆与七个关节，从编译后的模型读取每段固定位置、固定旋转、局部关节轴及关节位置，再逐段相乘。计算过程独立组合变换，模型参数来自同一份 MuJoCo 模型。对照值来自 `mj_forward` 后的 body 位姿，两者都转换到 `link0` 坐标系。
+
+在 WSL 中使用已有模型和 MuJoCo 环境运行。
+
+```bash
+source /opt/ros/lyrical/setup.bash
+project='/mnt/c/Users/PC/Desktop/Embodied_Inteligence_Internship/hands-on-reinforcement-learning/15_RobotSystem'
+scene='/mnt/c/Users/PC/AppData/Local/EmbodiedAI/PandaSmoke/menagerie-98a70c5/franka_emika_panda/scene.xml'
+panda_python='/var/tmp/embodied-panda-ros2-lyrical/ros-venv/bin/python'
+
+"$panda_python" "$project/panda_fk.py" "$scene"
+"$panda_python" "$project/panda_fk.py" "$scene" \
+  --joints 0.1 -0.1 0 -1.57079 0 1.57079 -0.7853
+```
+
+默认固定输入共九组，不涉及随机采样。包括 `home`、第一轴加 0.1 rad 且第二轴减 0.1 rad，以及每次仅一轴相对 `home` 增加 0.05 rad 的七组。脚本输出两种位置和 3×3 旋转矩阵，比较位置欧氏误差和旋转矩阵逐元素最大绝对差，二者各自超过 `1e-9` 时退出失败。参数 `--joints` 接收七个有限关节角，单位为 rad。
+
+2026-11-08 在 WSL 2、MuJoCo 3.17.0、NumPy 2.5.4 上完成上述九组 agent 检查，最大位置差为 `4.710e-16 m`，最大旋转矩阵元素差为 `2.665e-15`。对照检查反映同模型下的数值一致性，精度受到模型及输入定义影响。本人手动复现见 [W3 清单](../../plan/02_W3部署清单.md)。
+
+## Panda 两轴到达任务
+
+`panda_two_joint_env.py` 提供原生 Python 的 `reset()` 和 `step(action)`。`reset()` 恢复 `home`，默认任务目标为 `(0.1, 0.1)` rad。观测依次是 `q1, q2, dq1, dq2, goal1, goal2, ctrl1, ctrl2`。动作是两轴位置命令增量，每轴限于 ±0.02 rad，累加后的命令限制在模型关节和执行器允许范围的交集。其他执行器保留 home 命令。每个动作推进 10 个 2 ms 物理步。
+
+两个受控关节的位置误差都小于 0.01 rad 且速度绝对值都小于 0.05 rad/s 时成功，奖励为 0。其他步奖励为 −1。无效状态、仿真警告或受控关节超出模型限位及 0.001 rad 容差时终止为失败。默认 250 步无成功或失败时记为超时，返回 `truncated=True`。这些是固定场景 smoke 的初始参数。
+
+在 WSL 中沿用上文的 `project`、`scene` 和 `panda_python`，先预测命令目标再运行。
+
+```bash
+"$panda_python" "$project/panda_two_joint_env.py" "$scene" \
+  --action 0.02 -0.01 --action 0.02 0.02
+```
+
+每行是一次 `reset` 或 `step` 的 JSON。两步执行器目标预期分别为 `(0.02, -0.01)` 和 `(0.04, 0.01)` rad。可用 `--goal 0.1 0.05` 改变任务目标后复跑。
+
+2026-11-08，agent 在固定模型、MuJoCo 3.17.0、NumPy 2.5.4 下验证复位与重复执行、命令及增量限幅、非法动作、超时和注入限位异常。成功分支用固定目标，先连续五步施加 `(0.02, 0.02)` rad，再施加零增量直至成功，于第 18 步通过。全部短检查无随机采样。个人命令行复现待完成。
+
+## Panda 两轴 SAC CPU 检查
+
+`panda_sac_smoke.py` 复用 `11_SAC/Pendulum` 的 SAC 和回放池。策略和回放使用归一化动作 `[-1, 1]²`，送入环境时乘以 0.02，转换为关节目标增量。回合在终止或超时后重置。回放池只把 `terminated` 作为停止 bootstrap 的标记。
+
+从项目根目录在 Windows PowerShell 运行。使用 Python 3.12 和隔离的 CPU 环境。已有环境可跳过安装。
+
+```powershell
+$cpuEnv = 'C:\Users\PC\Documents\ChatGPT\EIP\.venv-panda-sac-cpu'
+python -m venv $cpuEnv
+$pandaPython = Join-Path $cpuEnv 'Scripts\python.exe'
+& $pandaPython -m pip install --index-url https://download.pytorch.org/whl/cpu 'torch==2.10.0+cpu'
+& $pandaPython -m pip install 'mujoco==3.17.0' 'numpy==2.5.4'
+$scene = Join-Path $env:LOCALAPPDATA 'EmbodiedAI\PandaSmoke\menagerie-98a70c5\franka_emika_panda\scene.xml'
+$out = Join-Path (Split-Path $cpuEnv) ('panda-sac-cpu-' + (Get-Date -Format 'yyyyMMdd-HHmmss'))
+& $pandaPython hands-on-reinforcement-learning/15_RobotSystem/panda_sac_smoke.py $scene $out
+```
+
+协议固定 seed 42、64 条采样、32 条 batch、一次参数更新。测试将单回合临时限为 16 步，用于覆盖超时重置。输出 `summary.json` 和 `sac_cpu.pt`，其中 checkpoint 包含网络、优化器、温度参数和配置。以相同状态和随机种子对照重载前后的动作。该流程验收接线、更新和保存重载，策略成功率另行评估。
+
+2026-11-08 在 Windows CPU、PyTorch 2.10.0+cpu、MuJoCo 3.17.0、NumPy 2.5.4 上通过。Actor 和两个 Critic 的最大参数变化均约 `3.0e-4`，重载动作最大绝对差为 `0`。
+
 ## 在本机复现
 
 从工作区根目录运行。已有模型缓存和虚拟环境时可直接运行最后一行。
@@ -174,3 +266,41 @@ export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ROS_DOMAIN_ID=106
 ```
 
 每次运行保存 `summary.json`、`bag_info.txt`、进程日志、QoS 配置和 MCAP。2026-11-07 的 `20261107-092518-formal-bag` 在 WSL 2 Ubuntu 26.04.1、ROS2 Lyrical、MuJoCo 3.17.0、NumPy 2.5.4 上通过。录得 1 条轨迹、12 条心跳、94 条状态与 90 条时钟，状态与时钟各自完整回放。重执行的 40 帧中，七轴位置和速度的最大绝对差分别为 `8.08e-9 rad`、`8.78e-8 rad/s`，两次 `joint1` 末帧均约为 `0.099622 rad`。整包的状态和时钟计数可以不同，比较窗口内逐帧检查二者的时间戳。rosbag2 对空心跳类型可能提示缺少内嵌消息定义，脚本使用本机 `std_msgs/msg/Empty` 验证解码和回放。
+
+录包脚本将 C++ 发布器的 `required_subscribers` 设为 2，等仿真节点和录包器分别匹配轨迹及心跳话题后才发送。直接运行发布器和 launch 时默认只要求 1 个订阅者。
+
+## 正式启动与参数
+
+沿用上一节的 WSL 环境，在干净目录构建两个包并加载 overlay。使用空闲 ROS 域，每个域只运行一个发布 `/clock` 的仿真节点。
+
+```bash
+ros2 launch panda_sim panda_demo.launch.py "scene_path:=$scene" "sim_python:=$panda_python"
+```
+
+launch 默认在 `/panda` 启动仿真和 C++ 发布器。发布器完成一次发送后退出，仿真继续保持最终目标并发布状态，按 Ctrl+C 结束。可加 `send_demo:=false` 只启动仿真。启动时可设置 `steps_per_message`（默认 10）和 `heartbeat_timeout_s`（默认 0.25 s）；两个值必须为正数，心跳期限须有限。模型步长为 2 ms，默认每个定时周期推进十步，名义状态周期为 20 ms。
+
+## 三组固定轨迹评估
+
+使用同一固定版本模型和默认参数。每组运行 3 次，共 9 次，无随机采样。每次启动新进程，通过 `/panda/reset` 恢复 `home` 并观察时间回退，等待仿真从 reset 后推进至少 1 s，再由 C++ 发出固定命令。用独立 MCAP 记录轨迹、心跳、状态和时钟。所有轨迹点的七轴值见 [发布器](ros2_ws/src/panda_trajectory_cmd/publish_trajectory.cpp) 和运行后的 `summary.json`。
+
+| 输入 | 运动时长 | 覆盖 |
+| --- | ---: | --- |
+| `single_axis` | 0.4 s | `joint1` 从 0 到 0.1 rad，其余保持 home |
+| `multi_axis` | 0.8 s | 七轴同时由 home 到一个终点 |
+| `multi_waypoint` | 1.2 s | 七轴由 home 经两个中间点到终点，部分关节中途反向 |
+
+以接收命令日志中的仿真时刻为零点，在其后每 20 ms 核对状态与 `/clock`。用包里的位置点分段插值得到参考，误差为实测减参考。运动段报告每轴 RMSE 和最大绝对误差。结束后继续记录 400 ms，以最后 200 ms 的最大绝对误差作为稳态验收，阈值预先固定为每轴 0.05 rad。重复差异取同一相对时间、同一关节在三次运行中的最大两两差值。频率和 P50/P95/P99 间隔从 MCAP 接收墙钟计算，反映录包端收到状态的情况。
+
+```bash
+export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST ROS_DOMAIN_ID=113
+out="$cache/ros2-results/$(date +%Y%m%d-%H%M%S)-three-trajectories"
+"$panda_python" "$project/ros2_smoke/evaluate.py" run "$scene" "$out"
+# 从既有 MCAP 和接受日志重新生成数据表
+"$panda_python" "$project/ros2_smoke/evaluate.py" analyze "$out"
+# 使用已安装 Matplotlib 的 Python 绘图
+python "$project/ros2_smoke/plot_tracking.py" "$out"
+```
+
+输出包括 `configuration.json`、`summary.json`、63 行七轴指标的 `joint_metrics.csv`，以及各次运行的 MCAP、日志和 `tracking.csv`。绘图脚本为每组生成一张 `tracking.png`。
+
+2026-11-07 在本机 WSL 2、ROS2 Lyrical、MuJoCo 3.17.0、NumPy 2.5.4 上完成九次。最大稳态绝对误差为 0.01137 rad，运动段最差单轴 RMSE 为 0.04432 rad，最大瞬时误差为 0.07341 rad。状态接收频率为 49.98–50.04 Hz，各次 P99 接收间隔最高为 21.19 ms。三组重复运行的最大位置差为 `8.07e-9 rad`。本轮实测文件在 `C:/Users/PC/Documents/ChatGPT/EIP/panda-nov08-results/`。

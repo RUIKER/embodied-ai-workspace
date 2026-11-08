@@ -19,6 +19,7 @@ from rclpy.serialization import deserialize_message
 from rosgraph_msgs.msg import Clock
 from sensor_msgs.msg import JointState
 from std_msgs.msg import Empty
+from std_srvs.srv import Trigger
 from trajectory_msgs.msg import JointTrajectory
 
 from run import nanoseconds, process, require_success, snapshot, wait_until
@@ -78,7 +79,25 @@ def read_acceptance(log):
     return int(matches[0])
 
 
-def record(output, sim_command, probe, qos):
+def reset_to_home(probe):
+    client = probe.create_client(Trigger, "/panda/reset")
+    try:
+        wait_until(probe, lambda: client.service_is_ready() and probe.states[-1][0] >= 200_000_000,
+                   "The reset service did not become ready")
+        before_reset = probe.states[-1][0]
+        after = len(probe.states)
+        response = client.call_async(Trigger.Request())
+        wait_until(probe, response.done, "The reset service did not answer")
+        result = response.result()
+        if not result.success:
+            raise RuntimeError(f"Reset failed: {result.message}")
+        wait_until(probe, lambda: any(stamp < before_reset for stamp, *_ in probe.states[after:]),
+                   "JointState timestamps did not restart after reset")
+    finally:
+        probe.destroy_client(client)
+
+
+def record(output, sim_command, probe, qos, *, trajectory_case=None, end_ns=END_NS):
     static_topics = output / "record_topics.yaml"
     static_topics.write_text(
         json.dumps({"static_topics_and_types_list": list(TYPES.items())}), encoding="utf-8",
@@ -88,6 +107,8 @@ def record(output, sim_command, probe, qos):
     with process(sim_log, *sim_command) as simulator:
         wait_until(probe, lambda: probe.states and probe.clocks, "Formal simulator did not start")
         probe.verify_publishers("panda_sim")
+        if trajectory_case is not None:
+            reset_to_home(probe)
         with process(
             record_log, "ros2", "bag", "record", "-s", "mcap", "-o", str(output / "bag"),
             "--static-topics-path", str(static_topics), "--no-discovery",
@@ -103,15 +124,18 @@ def record(output, sim_command, probe, qos):
                 "Recorder did not discover all four subscriptions",
             )
             publish_log = output / "publisher.log"
-            with process(
-                publish_log, "ros2", "run", "panda_trajectory_cmd", "publish_trajectory",
-                "--ros-args", "-r", "__ns:=/panda",
-            ) as publisher:
+            command = [
+                "ros2", "run", "panda_trajectory_cmd", "publish_trajectory",
+                "--ros-args", "-r", "__ns:=/panda", "-p", "required_subscribers:=2",
+            ]
+            if trajectory_case is not None:
+                command.extend(("-p", f"trajectory_case:={trajectory_case}"))
+            with process(publish_log, *command) as publisher:
                 require_success(publisher, publish_log)
             wait_until(probe, lambda: COMPLETION in sim_log.read_text(encoding="utf-8"),
                        f"The simulator did not complete its trajectory: {sim_log}")
             start_ns = read_acceptance(sim_log)
-            wait_until(probe, lambda: probe.states[-1][0] > start_ns + END_NS,
+            wait_until(probe, lambda: probe.states[-1][0] > start_ns + end_ns,
                        "Missing recorded settling window")
             stop(recorder, record_log)
         stop(simulator, sim_log)
@@ -124,11 +148,12 @@ def read_bag(bag):
                 rosbag2_py.ConverterOptions("", ""))
     if {topic.name: topic.type for topic in reader.get_all_topics_and_types()} != TYPES:
         raise RuntimeError("Unexpected topic set in the formal MCAP")
-    states, clocks, commands, heartbeats = [], [], [], []
+    states, clocks, commands, heartbeats, state_receive_ns = [], [], [], [], []
     while reader.has_next():
         topic, payload, receive_ns, _send_ns = reader.read_next_ext()
         if topic == STATE:
             states.append(snapshot(deserialize_message(payload, JointState)))
+            state_receive_ns.append(receive_ns)
         elif topic == CLOCK:
             clocks.append(nanoseconds(deserialize_message(payload, Clock).clock))
         elif topic == COMMAND:
@@ -141,7 +166,7 @@ def read_bag(bag):
     command_ns, command = commands[0]
     if heartbeats[-1] - command_ns < nanoseconds(command.points[-1].time_from_start):
         raise RuntimeError("The recorded heartbeat does not span the command duration")
-    return states, clocks, command, len(heartbeats)
+    return states, clocks, command, len(heartbeats), state_receive_ns
 
 
 def play(output, log, qos, *topics, options=()):
@@ -184,7 +209,8 @@ def reexecute(output, sim_command, qos):
                 wait_until(probe, lambda: COMPLETION in sim_log.read_text(encoding="utf-8"),
                            f"The restarted simulator did not complete its trajectory: {sim_log}")
                 start_ns = read_acceptance(sim_log)
-                wait_until(probe, lambda: probe.states[-1][0] >= start_ns + END_NS,
+                wait_until(probe, lambda: probe.states[-1][0] >= start_ns + END_NS
+                           and probe.clocks[-1] >= start_ns + END_NS,
                            "Missing reexecution settling window")
                 require_success(player, player_log)
             stop(simulator, sim_log)
@@ -193,26 +219,42 @@ def reexecute(output, sim_command, qos):
         probe.destroy_node()
 
 
-def aligned_window(states, clocks, start_ns):
-    window = {stamp - start_ns: (positions, velocities) for stamp, positions, velocities in states}
-    stamps = range(SAMPLE_NS, END_NS + 1, SAMPLE_NS)
+def aligned_window(states, clocks, start_ns, end_ns=END_NS):
+    stamps = range(SAMPLE_NS, end_ns + 1, SAMPLE_NS)
+    window = {}
+    for stamp, positions, velocities in states:
+        offset = stamp - start_ns
+        if offset in stamps:
+            if offset in window:
+                raise RuntimeError("Duplicate JointState timestamp in the comparison window")
+            window[offset] = (positions, velocities)
     if any(offset not in window for offset in stamps):
         raise RuntimeError("Missing a JointState in the command-relative comparison window")
-    if not {start_ns + offset for offset in stamps}.issubset(clocks):
-        raise RuntimeError("Missing a matching /clock sample in the comparison window")
+    missing_clock = {start_ns + offset for offset in stamps}.difference(clocks)
+    if missing_clock:
+        raise RuntimeError(f"Missing /clock stamps in the comparison window: {sorted(missing_clock)}")
     samples = np.array([window[offset] for offset in stamps])
     if not np.isfinite(samples).all():
         raise RuntimeError("Non-finite state in the command-relative comparison window")
     return samples
 
 
-def run(scene, output):
+def simulator_command(scene):
     prefix = Path(subprocess.check_output(["ros2", "pkg", "prefix", "panda_sim"], text=True, timeout=10).strip())
-    sim_command = [sys.executable, str(prefix / "lib/panda_sim/panda_sim_node"),
-                   "--ros-args", "-r", "__ns:=/panda", "-p", f"scene_path:={scene}"]
+    return [sys.executable, str(prefix / "lib/panda_sim/panda_sim_node"),
+            "--ros-args", "-r", "__ns:=/panda", "-p", f"scene_path:={scene}"]
+
+
+def write_live_qos(output):
     qos = output / "live_qos.yaml"
     qos.write_text(json.dumps({topic: {"reliability": "best_effort", "depth": 100}
                               for topic in (CLOCK, HEARTBEAT)}), encoding="utf-8")
+    return qos
+
+
+def run(scene, output):
+    sim_command = simulator_command(scene)
+    qos = write_live_qos(output)
     playback_qos = output / "state_playback_qos.yaml"
     playback_qos.write_text(json.dumps({topic: {"reliability": "reliable", "depth": 100}
                                        for topic in (CLOCK, STATE)}), encoding="utf-8")
@@ -225,7 +267,7 @@ def run(scene, output):
     bag = output / "bag"
     with (output / "bag_info.txt").open("w", encoding="utf-8") as info:
         subprocess.run(["ros2", "bag", "info", str(bag)], check=True, stdout=info, timeout=15)
-    states, clocks, command, heartbeats = read_bag(bag)
+    states, clocks, command, heartbeats, _receive_ns = read_bag(bag)
     baseline = aligned_window(states, clocks, start_ns)
     check_state_replay(output, states, clocks, playback_qos)
     repeated, repeated_clocks, repeated_start_ns = reexecute(output, sim_command, qos)

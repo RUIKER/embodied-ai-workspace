@@ -1,0 +1,12 @@
+{
+  "scene": "/mnt/c/Users/PC/AppData/Local/EmbodiedAI/PandaSmoke/menagerie-98a70c5/franka_emika_panda/scene.xml",
+  "source_csv": "/mnt/c/Users/PC/Desktop/Embodied_Inteligence_Internship/hands-on-reinforcement-learning/15_RobotSystem/results/20261108_190814_joint1_actuator_torque/trajectory.csv",
+  "mujoco": "3.17.0",
+  "baseline_damping": 1.0,
+  "changed_damping": 2.0,
+  "baseline_replay_max_error_rad": 0.04696092206455291,
+  "max_abs_position_difference_rad": 0.03502431882523671,
+  "final_position_difference_rad": -0.03502431882523671,
+  "note": "Open-loop baseline may differ from the recorded closed-loop trajectory; do not attribute that difference to damping.",
+  "method": "actuator1 disabled; recorded generalized torque applied at joint1; other actuators unchanged"
+}
