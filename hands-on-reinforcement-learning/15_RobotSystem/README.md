@@ -94,6 +94,8 @@ panda_python='/var/tmp/embodied-panda-ros2-lyrical/ros-venv/bin/python'
 
 `panda_sac_smoke.py` 复用 `11_SAC/Pendulum` 的 SAC 和回放池。策略和回放使用归一化动作 `[-1, 1]²`，送入环境时乘以 0.02，转换为关节目标增量。回合在终止或超时后重置。回放池只把 `terminated` 作为停止 bootstrap 的标记。
 
+11 月 10 日的固定动作练习、源码追踪及正常步/超时步对照见 [SAC 单条样本追踪](SAC单条样本追踪.md)。Agent 已验证该入口；本人复现和口述待完成。
+
 从项目根目录在 Windows PowerShell 运行。使用 Python 3.12 和隔离的 CPU 环境。已有环境可跳过安装。
 
 ```powershell
