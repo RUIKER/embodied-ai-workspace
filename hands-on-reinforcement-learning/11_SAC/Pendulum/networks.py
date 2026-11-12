@@ -45,6 +45,10 @@ class GaussianPolicy(torch.nn.Module):
         # 多维动作的联合 log probability 等于各维 log probability 之和。
         return actions, log_probs.sum(dim=-1, keepdim=True)
 
+    def deterministic_action(self, states):
+        mean = self.fc_mu(F.relu(self.fc1(states)))
+        return self.action_bias + self.action_scale * torch.tanh(mean)
+
 
 class Critic(torch.nn.Module):
     """Q(s,a) 网络。

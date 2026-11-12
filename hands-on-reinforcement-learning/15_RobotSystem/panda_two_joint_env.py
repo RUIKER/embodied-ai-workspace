@@ -26,9 +26,7 @@ class PandaTwoJointEnv:
         self.vadr = self.model.jnt_dofadr[self.joints]
         self.lower = np.maximum(self.model.jnt_range[self.joints, 0], self.model.actuator_ctrlrange[self.actuators, 0])
         self.upper = np.minimum(self.model.jnt_range[self.joints, 1], self.model.actuator_ctrlrange[self.actuators, 1])
-        self.goal = np.array(goal, dtype=float, copy=True)
-        if self.goal.shape != (2,) or not np.isfinite(self.goal).all() or np.any(self.goal < self.lower) or np.any(self.goal > self.upper):
-            raise ValueError('Goal must contain two finite joint angles inside control limits')
+        self.goal = self.validate_goal(goal)
         if not isinstance(max_steps, int) or max_steps <= 0:
             raise ValueError('max_steps must be a positive integer')
         self.max_steps = max_steps
@@ -41,7 +39,15 @@ class PandaTwoJointEnv:
         return np.r_[self.data.qpos[self.qadr], self.data.qvel[self.vadr],
                      self.goal, self.data.ctrl[self.actuators]].copy()
 
-    def reset(self):
+    def validate_goal(self, goal):
+        goal = np.array(goal, dtype=float, copy=True)
+        if goal.shape != (2,) or not np.isfinite(goal).all() or np.any(goal < self.lower) or np.any(goal > self.upper):
+            raise ValueError('Goal must contain two finite joint angles inside control limits')
+        return goal
+
+    def reset(self, *, goal=None):
+        if goal is not None:
+            self.goal = self.validate_goal(goal)
         mujoco.mj_resetDataKeyframe(self.model, self.data, self.model.key('home').id)
         mujoco.mj_forward(self.model, self.data)
         self.steps = 0
