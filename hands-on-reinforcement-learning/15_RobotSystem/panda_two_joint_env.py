@@ -10,6 +10,16 @@ import mujoco
 import numpy as np
 
 
+ACTION_INCREMENT_LIMIT_RAD = 0.02
+POSITION_ERROR_THRESHOLD_RAD = 0.01
+SPEED_THRESHOLD_RAD_S = 0.05
+
+
+def goal_reached(q, velocity, goal):
+    return bool(np.all(np.abs(q - goal) < POSITION_ERROR_THRESHOLD_RAD)
+                and np.all(np.abs(velocity) < SPEED_THRESHOLD_RAD_S))
+
+
 class PandaTwoJointEnv:
     def __init__(self, scene, goal=(0.1, 0.1), max_steps=250):
         self.model = mujoco.MjModel.from_xml_path(str(Path(scene)))
@@ -61,7 +71,8 @@ class PandaTwoJointEnv:
         if action.shape != (2,) or not np.isfinite(action).all():
             raise ValueError('action must contain two finite increments')
         previous_target = self.data.ctrl[self.actuators]
-        target = np.clip(previous_target + np.clip(action, -.02, .02), self.lower, self.upper)
+        limit = ACTION_INCREMENT_LIMIT_RAD
+        target = np.clip(previous_target + np.clip(action, -limit, limit), self.lower, self.upper)
         self.data.ctrl[self.actuators] = target
         for _ in range(10):
             mujoco.mj_step(self.model, self.data)
@@ -75,7 +86,7 @@ class PandaTwoJointEnv:
         self.steps += 1
         vel = self.data.qvel[self.vadr]
         failed = bool(invalid or warning or out_of_range)
-        success = bool(not failed and np.all(np.abs(q - self.goal) < .01) and np.all(np.abs(vel) < .05))
+        success = not failed and goal_reached(q, vel, self.goal)
         terminated = failed or success
         truncated = bool(not terminated and self.steps >= self.max_steps)
         self.finished = bool(terminated or truncated)

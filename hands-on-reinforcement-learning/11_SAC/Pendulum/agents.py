@@ -1,8 +1,22 @@
+from math import isfinite
+
 import numpy as np
 import torch
 import torch.nn.functional as F
 
 from networks import Critic, GaussianPolicy
+
+
+def gradient_norm(parameters, loss, name):
+    """Measure the gradients of one loss before its optimizer step."""
+    grads = [parameter.grad.detach() for parameter in parameters if parameter.grad is not None]
+    loss_value = float(loss.detach())
+    if not grads:
+        raise FloatingPointError(f"{name}: no gradients")
+    norm = torch.stack([grad.norm(dtype=torch.float64) for grad in grads]).norm().item()
+    if not isfinite(loss_value) or not isfinite(norm):
+        raise FloatingPointError(f"{name}: non-finite loss or gradient (loss={loss_value}, norm={norm})")
+    return norm
 
 
 class SAC:
@@ -77,7 +91,7 @@ class SAC:
             target_param.data.mul_(1 - self.tau)
             target_param.data.add_(self.tau * online_param.data)
 
-    def update(self, batch):
+    def update(self, batch, *, diagnostics=False):
         # 一个 batch 中的形状通常为：
         # states [B, state_dim]，actions [B, action_dim]，rewards/dones [B, 1]。
         states, actions, rewards, next_states, dones = batch
@@ -95,9 +109,13 @@ class SAC:
         critic_2_loss = F.mse_loss(self.critic_2(states, actions), td_target)
         self.critic_1_optimizer.zero_grad()
         critic_1_loss.backward()
+        if diagnostics:
+            critic_1_grad_norm = gradient_norm(self.critic_1.parameters(), critic_1_loss, "critic_1")
         self.critic_1_optimizer.step()
         self.critic_2_optimizer.zero_grad()
         critic_2_loss.backward()
+        if diagnostics:
+            critic_2_grad_norm = gradient_norm(self.critic_2.parameters(), critic_2_loss, "critic_2")
         self.critic_2_optimizer.step()
 
         # 重参数化采样让 actor 的梯度可以穿过随机动作到达网络参数。
@@ -111,6 +129,8 @@ class SAC:
         actor_loss = (alpha * log_probs - new_q).mean()
         self.actor_optimizer.zero_grad()
         actor_loss.backward()
+        if diagnostics:
+            actor_grad_norm = gradient_norm(self.actor.parameters(), actor_loss, "actor")
         self.actor_optimizer.step()
 
         # 自动温度调节：当前熵低于目标时增大 alpha，强化熵奖励；
@@ -120,7 +140,31 @@ class SAC:
         ).mean()
         self.log_alpha_optimizer.zero_grad()
         alpha_loss.backward()
+        if diagnostics:
+            alpha_grad_norm = gradient_norm([self.log_alpha], alpha_loss, "log_alpha")
         self.log_alpha_optimizer.step()
 
         self.soft_update(self.critic_1, self.target_critic_1)
         self.soft_update(self.critic_2, self.target_critic_2)
+
+        if diagnostics:
+            temperature = self.log_alpha.detach().exp().item()
+            if not isfinite(temperature) or temperature <= 0:
+                raise FloatingPointError(f"Invalid SAC temperature: {temperature}")
+            return {
+                "critic_1_loss": critic_1_loss.detach().item(),
+                "critic_2_loss": critic_2_loss.detach().item(),
+                "actor_loss": actor_loss.detach().item(),
+                "alpha_loss": alpha_loss.detach().item(),
+                "alpha": temperature,
+                "td_target_mean": td_target.mean().item(),
+                "actor_entropy_estimate": -log_probs.detach().mean().item(),
+                "actor_action_mean": new_actions.detach().mean(dim=0).tolist(),
+                "actor_action_std": new_actions.detach().std(dim=0, unbiased=False).tolist(),
+                "gradient_l2": {
+                    "critic_1": critic_1_grad_norm,
+                    "critic_2": critic_2_grad_norm,
+                    "actor": actor_grad_norm,
+                    "log_alpha": alpha_grad_norm,
+                },
+            }
