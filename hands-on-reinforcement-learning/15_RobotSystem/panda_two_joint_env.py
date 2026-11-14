@@ -2,6 +2,10 @@
 
 Native Python interface, not a Gymnasium environment or training implementation.
 Actions are joint-target increments in radians; one step lasts 20 ms.
+``control_mode='linear'`` matches the ROS node's first 20 ms of interpolation
+from the held target to the requested endpoint. This is a physics-only mode:
+it does not model ROS command acceptance, busy state, heartbeat or transport,
+and consecutive environment steps are not necessarily executable by that node.
 """
 import argparse
 import json
@@ -21,7 +25,10 @@ def goal_reached(q, velocity, goal):
 
 
 class PandaTwoJointEnv:
-    def __init__(self, scene, goal=(0.1, 0.1), max_steps=250):
+    def __init__(self, scene, goal=(0.1, 0.1), max_steps=250, control_mode='hold'):
+        if control_mode not in ('hold', 'linear'):
+            raise ValueError("control_mode must be 'hold' or 'linear'")
+        self.control_mode = control_mode
         self.model = mujoco.MjModel.from_xml_path(str(Path(scene)))
         self.data = mujoco.MjData(self.model)
         self.joints = np.array([self.model.joint(f'joint{i}').id for i in (1, 2)])
@@ -73,8 +80,13 @@ class PandaTwoJointEnv:
         previous_target = self.data.ctrl[self.actuators]
         limit = ACTION_INCREMENT_LIMIT_RAD
         target = np.clip(previous_target + np.clip(action, -limit, limit), self.lower, self.upper)
-        self.data.ctrl[self.actuators] = target
-        for _ in range(10):
+        if self.control_mode == 'hold':
+            self.data.ctrl[self.actuators] = target
+        for physics_step in range(10):
+            if self.control_mode == 'linear':
+                # The ROS node interpolates at the start of each physical step.
+                self.data.ctrl[self.actuators] = previous_target + (
+                    target - previous_target) * (physics_step / 10)
             mujoco.mj_step(self.model, self.data)
             invalid = not (np.isfinite(self.data.qpos).all() and np.isfinite(self.data.qvel).all())
             warning = any(w.number for w in self.data.warning)
@@ -91,9 +103,13 @@ class PandaTwoJointEnv:
         truncated = bool(not terminated and self.steps >= self.max_steps)
         self.finished = bool(terminated or truncated)
         outcome = 'failure' if failed else 'success' if success else 'timeout' if truncated else 'running'
+        held_target = self.data.ctrl[self.actuators].copy()
         return self.observation(), (0.0 if success else -1.0), terminated, truncated, {
-            'outcome': outcome, 'step': self.steps, 'applied_increment_rad': target - previous_target,
-            'target_rad': target.copy(), 'physics_warning': bool(warning), 'actual_limit_violation': bool(out_of_range)}
+            'outcome': outcome, 'step': self.steps, 'applied_increment_rad': held_target - previous_target,
+            # target_rad is the requested endpoint; held_target_rad is what was
+            # actually applied before the last completed physical step.
+            'target_rad': target.copy(), 'held_target_rad': held_target,
+            'physics_warning': bool(warning), 'actual_limit_violation': bool(out_of_range)}
 
 
 def main():
