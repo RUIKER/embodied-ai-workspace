@@ -1,0 +1,19 @@
+# Apply the next action exactly once in the named episode.
+uint64 episode
+uint32 step
+float64[2] increment_rad
+---
+bool accepted
+string reason
+uint64 episode
+uint32 step
+float64 sim_time_s
+# q1, q2, dq1, dq2, goal1, goal2, ctrl1, ctrl2
+float64[8] observation
+float64[2] applied_increment_rad
+float64 reward
+bool terminated
+bool truncated
+string outcome
+bool physics_warning
+bool actual_limit_violation

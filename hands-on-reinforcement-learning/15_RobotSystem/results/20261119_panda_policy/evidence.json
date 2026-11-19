@@ -1,0 +1,1149 @@
+{
+  "date": "2026-11-19",
+  "offline_paired_successes": [
+    {
+      "training_seed": 43,
+      "cases": 24,
+      "sac_successes": 0,
+      "sac_her_successes": 14,
+      "position_target_successes": 24
+    },
+    {
+      "training_seed": 137,
+      "cases": 24,
+      "sac_successes": 0,
+      "sac_her_successes": 24,
+      "position_target_successes": 24
+    },
+    {
+      "training_seed": 2027,
+      "cases": 24,
+      "sac_successes": 2,
+      "sac_her_successes": 24,
+      "position_target_successes": 24
+    }
+  ],
+  "ros2_policy_config": {
+    "xml_sha256": {
+      "scene": "c7aba97eb836f3b01a6a1d0442a8c401ce360c64471772cf0f8271c1a8328373",
+      "panda": "8619f39a4c30fc90258ef0828eeb5e3a15347066139baa09c3cbeb9c485a6f96"
+    },
+    "mujoco": "3.17.0",
+    "numpy": "2.5.4",
+    "step_s": 0.02,
+    "action_scale_rad": 0.02,
+    "max_episode_steps": 250,
+    "model_digest": "2e692aedb7c008a69343e9b7fd13a7e57a26bd3af04504143f3b76f1823e287d",
+    "checkpoint_sha256": "63a222bc167b568ecf20f2896482aa6a6ff4427706397e32a018a5d05290f802",
+    "actor_sha256": "0310f9e03b021c681781acf04707bb90aef5b396486daefb1f2536d290cc8d25",
+    "split": "heldout_v1",
+    "cases": [
+      [
+        30101,
+        [
+          0.104,
+          0.06
+        ]
+      ],
+      [
+        30102,
+        [
+          0.058,
+          0.064
+        ]
+      ],
+      [
+        30103,
+        [
+          0.148,
+          0.123
+        ]
+      ],
+      [
+        30104,
+        [
+          0.045,
+          0.04
+        ]
+      ],
+      [
+        30105,
+        [
+          0.05,
+          0.086
+        ]
+      ],
+      [
+        30106,
+        [
+          0.042,
+          0.134
+        ]
+      ],
+      [
+        30107,
+        [
+          -0.097,
+          0.049
+        ]
+      ],
+      [
+        30108,
+        [
+          -0.059,
+          0.13
+        ]
+      ],
+      [
+        30109,
+        [
+          -0.144,
+          0.041
+        ]
+      ],
+      [
+        30110,
+        [
+          -0.125,
+          0.149
+        ]
+      ],
+      [
+        30111,
+        [
+          -0.054,
+          0.099
+        ]
+      ],
+      [
+        30112,
+        [
+          -0.102,
+          0.072
+        ]
+      ],
+      [
+        30113,
+        [
+          -0.154,
+          -0.133
+        ]
+      ],
+      [
+        30114,
+        [
+          -0.041,
+          -0.094
+        ]
+      ],
+      [
+        30115,
+        [
+          -0.076,
+          -0.057
+        ]
+      ],
+      [
+        30116,
+        [
+          -0.074,
+          -0.114
+        ]
+      ],
+      [
+        30117,
+        [
+          -0.108,
+          -0.09
+        ]
+      ],
+      [
+        30118,
+        [
+          -0.103,
+          -0.065
+        ]
+      ],
+      [
+        30119,
+        [
+          0.053,
+          -0.128
+        ]
+      ],
+      [
+        30120,
+        [
+          0.08,
+          -0.102
+        ]
+      ],
+      [
+        30121,
+        [
+          0.04,
+          -0.154
+        ]
+      ],
+      [
+        30122,
+        [
+          0.082,
+          -0.045
+        ]
+      ],
+      [
+        30123,
+        [
+          0.05,
+          -0.048
+        ]
+      ],
+      [
+        30124,
+        [
+          0.139,
+          -0.155
+        ]
+      ]
+    ],
+    "delay_steps": 0
+  },
+  "actor_export": {
+    "checkpoint_sha256": "63a222bc167b568ecf20f2896482aa6a6ff4427706397e32a018a5d05290f802",
+    "model_digest": "2e692aedb7c008a69343e9b7fd13a7e57a26bd3af04504143f3b76f1823e287d",
+    "case_ids": [
+      30101,
+      30102,
+      30103,
+      30104,
+      30105,
+      30106,
+      30107,
+      30108,
+      30109,
+      30110,
+      30111,
+      30112,
+      30113,
+      30114,
+      30115,
+      30116,
+      30117,
+      30118,
+      30119,
+      30120,
+      30121,
+      30122,
+      30123,
+      30124
+    ],
+    "reference_observations": 3021,
+    "max_abs_action_difference": 5.364418029785156e-07,
+    "tolerance": 1e-06
+  },
+  "ros2_policy": {
+    "status": "PASS",
+    "same_actor_step_log_matches": true,
+    "duplicate_step_rejected": true,
+    "post_episode_step_rejected": true,
+    "stale_episode_rejected": true,
+    "per_episode": [
+      {
+        "seed": 30101,
+        "goal_rad": [
+          0.104,
+          0.06
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.104,
+          0.06,
+          0.0,
+          0.0
+        ],
+        "return": -41.0,
+        "steps": 42,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.009999326027284622,
+          0.005862633880884996
+        ],
+        "final_abs_speed_rad_s": [
+          0.0028483984122439692,
+          0.0016835429858987085
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30102,
+        "goal_rad": [
+          0.058,
+          0.064
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.058,
+          0.064,
+          0.0,
+          0.0
+        ],
+        "return": -27.0,
+        "steps": 28,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.0057602350681031506,
+          0.009903064296304172
+        ],
+        "final_abs_speed_rad_s": [
+          0.0022325044510154227,
+          0.010233430456725031
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30103,
+        "goal_rad": [
+          0.148,
+          0.123
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.148,
+          0.123,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.010537153746283029,
+          0.010223997860260986
+        ],
+        "final_abs_speed_rad_s": [
+          1.0461986143007314e-08,
+          6.16594787313586e-09
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30104,
+        "goal_rad": [
+          0.045,
+          0.04
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.045,
+          0.04,
+          0.0,
+          0.0
+        ],
+        "return": -15.0,
+        "steps": 16,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.008922688980731647,
+          0.009918679809098534
+        ],
+        "final_abs_speed_rad_s": [
+          0.025188858537853714,
+          0.02086205979497652
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30105,
+        "goal_rad": [
+          0.05,
+          0.086
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.05,
+          0.086,
+          0.0,
+          0.0
+        ],
+        "return": -47.0,
+        "steps": 48,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.004480549760286778,
+          0.009976540609872589
+        ],
+        "final_abs_speed_rad_s": [
+          0.0017072524189199474,
+          0.0035736390323371395
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30106,
+        "goal_rad": [
+          0.042,
+          0.134
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.042,
+          0.134,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.0031513634957537826,
+          0.012366897395856016
+        ],
+        "final_abs_speed_rad_s": [
+          2.3341901342029656e-09,
+          4.003808590758232e-09
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30107,
+        "goal_rad": [
+          -0.097,
+          0.049
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.097,
+          0.049,
+          0.0,
+          0.0
+        ],
+        "return": -39.0,
+        "steps": 40,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.004332853929556901,
+          0.009894323231148874
+        ],
+        "final_abs_speed_rad_s": [
+          0.006793042835705494,
+          0.005980271342114525
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30108,
+        "goal_rad": [
+          -0.059,
+          0.13
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.059,
+          0.13,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.0033828457238460966,
+          0.013371818766868437
+        ],
+        "final_abs_speed_rad_s": [
+          1.4454516352688517e-08,
+          1.1132756241424301e-08
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30109,
+        "goal_rad": [
+          -0.144,
+          0.041
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.144,
+          0.041,
+          0.0,
+          0.0
+        ],
+        "return": -38.0,
+        "steps": 39,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.00755712383784643,
+          0.009954468352167262
+        ],
+        "final_abs_speed_rad_s": [
+          0.006929629394073607,
+          0.00356416926215383
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30110,
+        "goal_rad": [
+          -0.125,
+          0.149
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.125,
+          0.149,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.0076977790933308865,
+          0.014636013021622846
+        ],
+        "final_abs_speed_rad_s": [
+          7.00006483251774e-08,
+          1.3032462873246053e-08
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30111,
+        "goal_rad": [
+          -0.054,
+          0.099
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.054,
+          0.099,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.001913972791283955,
+          0.01107383188449193
+        ],
+        "final_abs_speed_rad_s": [
+          6.555031092798472e-09,
+          3.81441039340548e-09
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30112,
+        "goal_rad": [
+          -0.102,
+          0.072
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.102,
+          0.072,
+          0.0,
+          0.0
+        ],
+        "return": -61.0,
+        "steps": 62,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.003976801028754903,
+          0.009978965671442325
+        ],
+        "final_abs_speed_rad_s": [
+          0.0010667830952800648,
+          0.0013419405136180134
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30113,
+        "goal_rad": [
+          -0.154,
+          -0.133
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.154,
+          -0.133,
+          0.0,
+          0.0
+        ],
+        "return": -31.0,
+        "steps": 32,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.0019317962860509463,
+          0.009814262708643051
+        ],
+        "final_abs_speed_rad_s": [
+          0.0015777723893276785,
+          0.03716003624728387
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30114,
+        "goal_rad": [
+          -0.041,
+          -0.094
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.041,
+          -0.094,
+          0.0,
+          0.0
+        ],
+        "return": -26.0,
+        "steps": 27,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.007861994358526865,
+          0.009514178152913791
+        ],
+        "final_abs_speed_rad_s": [
+          0.008880081633820761,
+          0.03639162050801463
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30115,
+        "goal_rad": [
+          -0.076,
+          -0.057
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.076,
+          -0.057,
+          0.0,
+          0.0
+        ],
+        "return": -17.0,
+        "steps": 18,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.0028778300180868632,
+          0.00613179277744047
+        ],
+        "final_abs_speed_rad_s": [
+          0.03364801460750296,
+          0.04471155073412348
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30116,
+        "goal_rad": [
+          -0.074,
+          -0.114
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.074,
+          -0.114,
+          0.0,
+          0.0
+        ],
+        "return": -28.0,
+        "steps": 29,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.0052760488173967945,
+          0.009529393150793583
+        ],
+        "final_abs_speed_rad_s": [
+          0.007528600114004918,
+          0.03869407478296988
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30117,
+        "goal_rad": [
+          -0.108,
+          -0.09
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.108,
+          -0.09,
+          0.0,
+          0.0
+        ],
+        "return": -22.0,
+        "steps": 23,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.0016006951254110696,
+          0.008819338798383966
+        ],
+        "final_abs_speed_rad_s": [
+          0.016023452729788192,
+          0.049326623820104186
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30118,
+        "goal_rad": [
+          -0.103,
+          -0.065
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          -0.103,
+          -0.065,
+          0.0,
+          0.0
+        ],
+        "return": -18.0,
+        "steps": 19,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.006109744339549125,
+          0.00573758794896069
+        ],
+        "final_abs_speed_rad_s": [
+          0.03970992374124765,
+          0.048656380928307694
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30119,
+        "goal_rad": [
+          0.053,
+          -0.128
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.053,
+          -0.128,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.0117273242293926,
+          0.004800053115236236
+        ],
+        "final_abs_speed_rad_s": [
+          2.1107174089783283e-08,
+          1.3554751637037581e-08
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30120,
+        "goal_rad": [
+          0.08,
+          -0.102
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.08,
+          -0.102,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.013445152875628974,
+          0.004491782265281852
+        ],
+        "final_abs_speed_rad_s": [
+          5.1875498167060146e-09,
+          2.754730347364409e-08
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30121,
+        "goal_rad": [
+          0.04,
+          -0.154
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.04,
+          -0.154,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.010994107185734101,
+          0.005398520353882746
+        ],
+        "final_abs_speed_rad_s": [
+          1.498515632637909e-08,
+          9.173552322531733e-09
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30122,
+        "goal_rad": [
+          0.082,
+          -0.045
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.082,
+          -0.045,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.011959010103433282,
+          0.001082592343064924
+        ],
+        "final_abs_speed_rad_s": [
+          9.87448520247894e-09,
+          1.4819003853331588e-08
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30123,
+        "goal_rad": [
+          0.05,
+          -0.048
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.05,
+          -0.048,
+          0.0,
+          0.0
+        ],
+        "return": -97.0,
+        "steps": 98,
+        "outcome": "success",
+        "final_abs_error_rad": [
+          0.009999491329178455,
+          0.0007998145194383008
+        ],
+        "final_abs_speed_rad_s": [
+          0.00013614011984479138,
+          0.00019492469924214256
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      },
+      {
+        "seed": 30124,
+        "goal_rad": [
+          0.139,
+          -0.155
+        ],
+        "initial_observation": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.139,
+          -0.155,
+          0.0,
+          0.0
+        ],
+        "return": -250.0,
+        "steps": 250,
+        "outcome": "timeout",
+        "final_abs_error_rad": [
+          0.01910900022439023,
+          0.008994668009127654
+        ],
+        "final_abs_speed_rad_s": [
+          2.546739546846825e-08,
+          1.8371573886308433e-09
+        ],
+        "command_clip_steps": 0,
+        "physics_warning": false,
+        "actual_limit_violation": false
+      }
+    ]
+  },
+  "ros2_fixed_trajectory_record_replay": {
+    "result": "PASS",
+    "ros_distro": "lyrical",
+    "mujoco": "3.17.0",
+    "numpy": "2.5.4",
+    "command_messages": 1,
+    "heartbeat_messages": 12,
+    "state_replay_samples": 110,
+    "clock_replay_samples": 106,
+    "command_reexecution_samples": 40,
+    "recorded_acceptance_sim_ns": 1580000000,
+    "reexecution_acceptance_sim_ns": 2560000000,
+    "recorded_joint1_endpoint_rad": 0.09962211012372425,
+    "reexecuted_joint1_endpoint_rad": 0.0996221101237255,
+    "reexecution_max_abs_position_delta_rad": 2.1050228227181833e-10,
+    "reexecution_max_abs_velocity_delta_rad_s": 2.27638373433389e-09
+  },
+  "case_30124_final_steps": {
+    "sac": {
+      "seed": 30124,
+      "step": 250,
+      "sim_time_s": 4.999999999999671,
+      "observation": [
+        -0.060822034114363044,
+        -1.2352874810232177,
+        -0.21742391009604634,
+        -0.16227304474238222,
+        0.139,
+        -0.155,
+        -0.08181731154676518,
+        -1.244954277276994
+      ],
+      "next_observation": [
+        -0.06555921207295182,
+        -1.2386900072178344,
+        -0.2197729825510128,
+        -0.16220858751970677,
+        0.139,
+        -0.155,
+        -0.0867790143704041,
+        -1.2483204370737087
+      ],
+      "action_normalized": [
+        -0.2480851411819458,
+        -0.16830798983573914
+      ],
+      "requested_rad": [
+        -0.004961702823638916,
+        -0.0033661597967147828
+      ],
+      "applied_rad": [
+        -0.004961702823638919,
+        -0.0033661597967147294
+      ],
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": true,
+      "outcome": "timeout",
+      "command_clipped": false,
+      "physics_warning": false,
+      "actual_limit_violation": false
+    },
+    "sac_her_ros2": {
+      "seed": 30124,
+      "step": 250,
+      "sim_time_s": 4.999999999999671,
+      "observation": [
+        0.11989099929419915,
+        -0.1460053319839444,
+        -5.271210273664897e-09,
+        -8.588759133218664e-09,
+        0.139,
+        -0.155,
+        0.11989099873870143,
+        -0.15128290211956483
+      ],
+      "next_observation": [
+        0.11989099977560978,
+        -0.14600533199087234,
+        2.546739546846825e-08,
+        1.8371573886308433e-09,
+        0.139,
+        -0.155,
+        0.11989100231498012,
+        -0.15128290107648354
+      ],
+      "action_normalized": [
+        1.7881393432617188e-07,
+        5.21540641784668e-08
+      ],
+      "requested_rad": [
+        3.5762786865234374e-09,
+        1.043081283569336e-09
+      ],
+      "applied_rad": [
+        3.5762786898541066e-09,
+        1.043081288010228e-09
+      ],
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": true,
+      "outcome": "timeout",
+      "command_clipped": false,
+      "physics_warning": false,
+      "actual_limit_violation": false
+    },
+    "position_target": {
+      "seed": 30124,
+      "step": 21,
+      "sim_time_s": 0.4200000000000003,
+      "observation": [
+        0.1345112964066006,
+        -0.14449018598513474,
+        0.047087076315295406,
+        -0.057029165019545816,
+        0.139,
+        -0.155,
+        0.139,
+        -0.155
+      ],
+      "next_observation": [
+        0.13535273244676663,
+        -0.1455057384039248,
+        0.03824478992927927,
+        -0.04601728137093018,
+        0.139,
+        -0.155,
+        0.139,
+        -0.155
+      ],
+      "action_normalized": [
+        0.0,
+        0.0
+      ],
+      "requested_rad": [
+        0.0,
+        0.0
+      ],
+      "applied_rad": [
+        0.0,
+        0.0
+      ],
+      "reward": 0.0,
+      "terminated": true,
+      "truncated": false,
+      "outcome": "success",
+      "command_clipped": false,
+      "physics_warning": false,
+      "actual_limit_violation": false
+    }
+  }
+}

@@ -1,0 +1,9 @@
+# Rewind to home and start a new reaching episode.
+float64[2] goal_rad
+---
+bool accepted
+string reason
+uint64 episode
+string model_digest
+# q1, q2, dq1, dq2, goal1, goal2, ctrl1, ctrl2
+float64[8] observation
